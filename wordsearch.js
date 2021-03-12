@@ -1,7 +1,8 @@
 
 var container = document.getElementById('wordsearch-container');
 var makeButton = document.getElementById('make')
-var alphabet = ["a", "b", 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+// var wordArray = wordListGen();
 
 
 make.addEventListener('click', function() {
@@ -18,12 +19,14 @@ make.addEventListener('click', function() {
 })
 
 function wordListGen() {
-    input = document.getElementById('input').val
+    input = document.getElementById('input').value
     input.split(",");
     return input;
 }
 
 function drawGrid(sizeInput) {
+
+   
 
     for(i=0; i<sizeInput; i++) {
         var row = document.createElement('div');
@@ -34,10 +37,13 @@ function drawGrid(sizeInput) {
         
         for(j=0; j<sizeInput; j++) 
         {
+            letter = Math.floor(Math.random() * 26);
             var box = document.createElement('div');
             box.setAttribute('id', row.id + j);
             box.setAttribute('class', 'box');
+            box.innerHTML = alphabet[letter];
             row.appendChild(box);
+
 
         }
      }
