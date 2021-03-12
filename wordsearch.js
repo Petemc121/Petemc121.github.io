@@ -2,10 +2,15 @@
 var container = document.getElementById('wordsearch_container');
 var makeButton = document.getElementById('make')
 var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+var input1 = document.getElementById('input')
+
+
+input1.innerHTML = "";
 
 
 
 make.addEventListener('click', function() {
+
 
     var sizeInput = document.getElementById('sizeInput').value
     var input = document.getElementById('input').value
@@ -20,16 +25,27 @@ make.addEventListener('click', function() {
     } else {
         drawGrid(sizeInput);
         var wordArray = wordListGen();
+        console.log(wordArray.length)
+        console.log(wordArray)
+        startArray =[]
         for(i=0;i<wordArray.length;i++) {
-            random = Math.floor(Math.random()*sizeInput);
-            let row = document.getElementById(random);
-            for(j=0;j<wordArray[i].length;j++) {
-                
-                    let box = document.getElementById(row.id + j);
-                    console.log(box.id)
-                    box.innerHTML = wordArray[i][j];
-            }
-        }
+            random = Math.floor(Math.random()*sizeInput) -1
+            for(x=0;x<startArray.length;i++) {
+                let row = document.getElementById(random);
+                 console.log(random)
+                if (random == startArray[i]) {
+                    random = Math.floor(Math.random()*sizeInput) -1
+                } else {
+                    startArray.push(random)
+                    for(j=0;j<wordArray[i].length;j++) {
+                        let box = document.getElementById(row.id + j);
+                        box.innerHTML = wordArray[i][j];
+                }
+                    
+                }
+    }
+}
+console.log(startArray)
     }
 })
 
@@ -54,7 +70,7 @@ function drawGrid(sizeInput) {
         container.appendChild(row)
 
         
-        for(j=0; j<sizeInput; j++) 
+        for(j=0; j<sizeInput ; j++) 
         {
             letter = Math.floor(Math.random() * 26);
             var box = document.createElement('div');
