@@ -15,7 +15,6 @@ make.addEventListener('click', function() {
     var sizeInput = document.getElementById('sizeInput').value
     var input = document.getElementById('input').value
     inputstring = toString(input);
-    console.log(input)
     if (sizeInput == "" || input == "") {
         alert("fields are empty.")
     } else if (isNaN(sizeInput)) {
@@ -26,27 +25,38 @@ make.addEventListener('click', function() {
         drawGrid(sizeInput);
         var wordArray = wordListGen();
         console.log(wordArray.length)
-        console.log(wordArray)
         startArray =[];
         for(i=0;i<wordArray.length;i++) {
-            random = Math.floor(Math.random()*sizeInput) -1;
-            let row = document.getElementById(random);
+            if (i == 0 ) {
+                random = Math.floor(Math.random() * sizeInput);
+                row = document.getElementById(random);
+               startArray.push(random);
+               
+               for(j=0;j<wordArray[i].length;j++) {
+                let box = document.getElementById(row.id + j);
+                box.innerHTML = wordArray[i][j];
+               }
+
+            }else {
+             
+            do {
+            random =  Math.floor(Math.random() * sizeInput);
+            }
+            while (startArray.includes(random));
+                
+            row = document.getElementById(random);
             startArray.push(random)
             console.log(random)
-                 for(x=0;x<startArray.length;x++) {
-                while (random == startArray[x]) 
-                {
-                    startArray.splice(startArray[x], 1)
-                    random = Math.floor(Math.random()*sizeInput) -1
-                }
+
                     for(j=0;j<wordArray[i].length;j++) {
                         let box = document.getElementById(row.id + j);
                         box.innerHTML = wordArray[i][j];
-                }     
-            }      
+                }         
     }
+    console.log(startArray)
 }
-console.log(startArray)
+    }
+
     
 })
 
@@ -58,6 +68,12 @@ function wordListGen() {
     output = input.split(",");
     }
     return output;
+}
+
+function randomExcluded(min,max,excluded) {
+    var n = Math.floor(Math.random()*(max-min) + min);
+    if(n>= excluded) n++;
+    return n 
 }
 
 function drawGrid(sizeInput) {
