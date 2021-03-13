@@ -27,26 +27,27 @@ make.addEventListener('click', function() {
         var wordArray = wordListGen();
         console.log(wordArray.length)
         console.log(wordArray)
-        startArray =[]
+        startArray =[];
         for(i=0;i<wordArray.length;i++) {
-            random = Math.floor(Math.random()*sizeInput) -1
-            for(x=0;x<startArray.length;i++) {
-                let row = document.getElementById(random);
-                 console.log(random)
-                if (random == startArray[i]) {
+            random = Math.floor(Math.random()*sizeInput) -1;
+            let row = document.getElementById(random);
+            startArray.push(random)
+            console.log(random)
+                 for(x=0;x<startArray.length;x++) {
+                while (random == startArray[x]) 
+                {
+                    startArray.splice(startArray[x], 1)
                     random = Math.floor(Math.random()*sizeInput) -1
-                } else {
-                    startArray.push(random)
+                }
                     for(j=0;j<wordArray[i].length;j++) {
                         let box = document.getElementById(row.id + j);
                         box.innerHTML = wordArray[i][j];
-                }
-                    
-                }
+                }     
+            }      
     }
 }
 console.log(startArray)
-    }
+    
 })
 
 function wordListGen() {
