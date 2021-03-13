@@ -86,7 +86,6 @@ function drawGrid(sizeInput) {
         row.setAttribute('class', "row")
         container.appendChild(row)
 
-        
         for(j=0; j<sizeInput ; j++) 
         {
             letter = Math.floor(Math.random() * 26);
