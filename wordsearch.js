@@ -71,8 +71,6 @@ make.addEventListener('click', function() {
                 } else if (FBDRandom == 2) {
                     // backwards
                     var startPos = Math.floor((Math.random() * sizeInput - wordArray[i].length) + wordArray[i].length);
-                    console.log (startPos)
-                    console.log ("row " + row.id)
                     for(let j = 0; j < wordArray[i].length; j++) {
                         if (j !=0 ) {
                             startPos--
@@ -83,9 +81,12 @@ make.addEventListener('click', function() {
                     }  
                 } else if (FBDRandom == 3) {
                     //vertical 
-                    
-
+                    do {
+                        startPos = Math.floor((Math.random() * sizeInput - wordArray[i].length) + wordArray[i].length);
+                    } while ()
                 }
+
+                
                 
     }
     console.log(startArray)
