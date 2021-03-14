@@ -27,6 +27,12 @@ make.addEventListener('click', function() {
         console.log(wordArray.length)
         startArray =[];
         for(i=0;i<wordArray.length;i++) {
+
+            if (wordArray[i].length > sizeInput) {
+                container.innerHTML = ""
+                alert("Make sure your word length is less than the size of your container");
+            } 
+            else {
             if (i == 0 ) {
                 random = Math.floor(Math.random() * sizeInput);
                 row = document.getElementById(random);
@@ -47,18 +53,28 @@ make.addEventListener('click', function() {
             row = document.getElementById(random);
             startArray.push(random)
             console.log(random)
+            let FBDRandom = Math.floor(Math.random() * 3) + 1;
 
-                    for(j=0;j<wordArray[i].length;j++) {
-                        let box = document.getElementById(row.id + j);
-                        box.innerHTML = wordArray[i][j];
-                }         
+            // if (FBDRandom == 1) {
+                    forwardWord();
+                
     }
     console.log(startArray)
+            }
 }
     }
 
     
 })
+
+function forwardWord() {
+    var startPos = Math.floor(Math.random() * (sizeInput - wordArray[i].length));
+    var wordArray = wordListGen();
+
+    for(let j = 0; j < wordArray[i].length; j++) {
+        let box = document.getElementById(row.id + startPos + j);
+console.log(box.id)    }
+}
 
 function wordListGen() {
     var input = document.getElementById('input').value
@@ -70,11 +86,6 @@ function wordListGen() {
     return output;
 }
 
-function randomExcluded(min,max,excluded) {
-    var n = Math.floor(Math.random()*(max-min) + min);
-    if(n>= excluded) n++;
-    return n 
-}
 
 function drawGrid(sizeInput) {
 
@@ -86,6 +97,7 @@ function drawGrid(sizeInput) {
         row.setAttribute('class', "row")
         container.appendChild(row)
 
+        
         for(j=0; j<sizeInput ; j++) 
         {
             letter = Math.floor(Math.random() * 26);
