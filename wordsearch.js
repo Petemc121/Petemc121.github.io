@@ -15,6 +15,7 @@ make.addEventListener('click', function() {
     var sizeInput = document.getElementById('sizeInput').value
     var input = document.getElementById('input').value
     inputstring = toString(input);
+    var wordArray = wordListGen();
     if (sizeInput == "" || input == "") {
         alert("fields are empty.")
     } else if (isNaN(sizeInput)) {
@@ -23,7 +24,6 @@ make.addEventListener('click', function() {
         alert('please include a size for your wordsearch between 8-20');
     } else {
         drawGrid(sizeInput);
-        var wordArray = wordListGen();
         console.log(wordArray.length)
         startArray =[];
         for(i=0;i<wordArray.length;i++) {
@@ -52,11 +52,40 @@ make.addEventListener('click', function() {
                 
             row = document.getElementById(random);
             startArray.push(random)
-            console.log(random)
-            let FBDRandom = Math.floor(Math.random() * 3) + 1;
+            let FBDRandom = Math.floor((Math.random() * 2) + 1);
 
-            // if (FBDRandom == 1) {
-                    forwardWord();
+
+            if (FBDRandom == 1) {
+                var startPos = Math.floor(Math.random() * (sizeInput - wordArray[i].length));
+            
+                for(let j = 0; j < wordArray[i].length; j++) {
+                        // forwards
+                    if (j != 0){
+                        startPos++
+                    }
+
+                    let box = document.getElementById(row.id + "" + startPos);
+                    box.innerHTML = wordArray[i][j];
+    
+                 }
+                } else if (FBDRandom == 2) {
+                    // backwards
+                    var startPos = Math.floor((Math.random() * sizeInput - wordArray[i].length) + wordArray[i].length);
+                    console.log (startPos)
+                    console.log ("row " + row.id)
+                    for(let j = 0; j < wordArray[i].length; j++) {
+                        if (j !=0 ) {
+                            startPos--
+                        }
+
+                        let box = document.getElementById(row.id + "" + startPos)
+                        box.innerHTML = wordArray[i][j];
+                    }  
+                } else if (FBDRandom == 3) {
+                    //vertical 
+                    
+
+                }
                 
     }
     console.log(startArray)
@@ -67,14 +96,6 @@ make.addEventListener('click', function() {
     
 })
 
-function forwardWord() {
-    var startPos = Math.floor(Math.random() * (sizeInput - wordArray[i].length));
-    var wordArray = wordListGen();
-
-    for(let j = 0; j < wordArray[i].length; j++) {
-        let box = document.getElementById(row.id + startPos + j);
-console.log(box.id)    }
-}
 
 function wordListGen() {
     var input = document.getElementById('input').value
